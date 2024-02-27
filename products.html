@@ -5,8 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Landing Page</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Karla:ital,wght@1,500&family=Kdam+Thmor+Pro&family=Oswald:wght@300&family=Roboto:wght@300&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Karla:ital,wght@1,500&family=Kdam+Thmor+Pro&family=Oswald:wght@300&family=Roboto:wght@300&display=swap" rel="stylesheet">
     <style>
         body {
             font-family: "DM Serif Display", serif;
@@ -50,6 +50,7 @@
             height: 200px;
             object-fit: cover;
             margin-right: 20px;
+            cursor: pointer;
         }
         .product-info {
             flex: 1;
@@ -75,12 +76,56 @@
             margin-right: 40px;
         }
         nav ul li a {
-            color: gold;
+            color: #ffd966;
             text-decoration: none;
             font-size: 25px;
         }
         nav ul li a:hover {
             color: white;
+        }
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgb(0,0,0);
+            background-color: rgba(0,0,0,0.9);
+        }
+         .modal-content {
+
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            max-width: 90%;
+            max-height: 90%;
+            width: 650px;
+            height: 500px;
+            box-shadow: 2px 4px 8px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+            animation-name: modalopen;
+            animation-duration: 0.5s;
+        }
+        @keyframes modalopen {
+            from {opacity: 0}
+            to {opacity: 1}
+        }
+        .close {
+            color: #aaa;
+            float: right;
+            padding-top: 10px;
+            margin-right: 50px;
+            font-size: 50px;
+            font-weight: bold;
+        }
+        .close:hover,
+        .close:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
         }
     </style>
 </head>
@@ -99,40 +144,68 @@
 
     <div class="container">
         <div class="product">
-            <img src="b1.jpg" alt="Product 1">
+            <img src="b1.jpg" alt="Product 1" onclick="openModal('b1.jpg', 'Pure Wildflower Honey')">
             <div class="product-info">
                 <h3>Pure Wildflower Honey</h3>
-                <p> Our pure wildflower honey is harvested from the nectar of various wildflowers, giving it a delightful and complex flavor profile. It's perfect for drizzling over yogurt, adding to tea, or using in baking recipes.</p>
+                <p>Our pure wildflower honey is harvested from the nectar of various wildflowers, giving it a delightful and complex flavor profile. It's perfect for drizzling over yogurt, adding to tea, or using in baking recipes.</p>
             </div>
         </div>
         <div class="product">
-            <img src="b2.jpg" alt="Product 2">
+            <img src="b2.jpg" alt="Product 2" onclick="openModal('b2.jpg', 'Organic Raw Honey')">
             <div class="product-info">
                 <h3>Organic Raw Honey</h3>
                 <p>Sourced from certified organic farms, our raw honey is unprocessed, retaining all its natural vitamins, enzymes, and antioxidants. Enjoy its rich flavor and health benefits as a natural sweetener or immune booster.</p>
             </div>
         </div>
         <div class="product">
-            <img src="b3.jpg" alt="Product 3">
+            <img src="b3.jpg" alt="Product 3" onclick="openModal('b3.jpg', 'Honeycomb in Honey')">
             <div class="product-info">
                 <h3>Honeycomb in Honey</h3>
-                <p> Treat yourself to a taste of nature with our honeycomb in honey. The sweet, chewy honeycomb pairs perfectly with the smooth, golden honey, creating a luxurious and indulgent treat. Enjoy it on its own or as a decadent topping for desserts.</p>
+                <p>Treat yourself to a taste of nature with our honeycomb in honey. The sweet, chewy honeycomb pairs perfectly with the smooth, golden honey, creating a luxurious and indulgent treat. Enjoy it on its own or as a decadent topping for desserts.</p>
             </div>
         </div>
         <div class="product">
-            <img src="b4.jpg" alt="Product 4">
+            <img src="b4.jpg" alt="Product 4" onclick="openModal('b4.jpg', 'Lavender Infused Honey')">
             <div class="product-info">
                 <h3>Lavender Infused Honey</h3>
                 <p>Experience the soothing aroma and delicate flavor of lavender in our lavender-infused honey. Drizzle it over fresh fruit, use it to sweeten herbal tea, or add a unique twist to your salad dressings.</p>
             </div>
         </div>
         <div class="product">
-            <img src="b5.jpg" alt="Product 5">
+            <img src="b5.jpg" alt="Product 5" onclick="openModal('b5.jpg', 'Creamed Honey with Cinnamon')">
             <div class="product-info">
                 <h3>Creamed Honey with Cinnamon</h3>
-                <p> Indulge in the creamy texture and warm, spicy flavor of our creamed honey with cinnamon. Spread it on toast, swirl it into oatmeal, or use it as a glaze for roasted vegetables for a deliciously sweet and savory experience.</p>
+                <p>Indulge in the creamy texture and warm, spicy flavor of our creamed honey with cinnamon. Spread it on toast, swirl it into oatmeal, or use it as a glaze for roasted vegetables for a deliciously sweet and savory experience.</p>
             </div>
         </div>
     </div>
+
+    <div id="myModal" class="modal">
+        <span class="close" onclick="closeModal()">&times;</span>
+        <img class="modal-content" id="modalImg" src="">
+    </div>
+
+    <script>
+        function openModal(imageSrc, caption) {
+            var modal = document.getElementById("myModal");
+            var modalImg = document.getElementById("modalImg");
+
+            modal.style.display = "block";
+            modalImg.src = imageSrc;
+            modalImg.alt = caption;
+        }
+
+        function closeModal() {
+            var modal = document.getElementById("myModal");
+            modal.style.display = "none";
+        }
+
+        window.onclick = function(event) {
+            var modal = document.getElementById("myModal");
+            if (event.target == modal) {
+                modal.style.display = "none";
+            }
+        }
+    </script>
 </body>
 </html>
