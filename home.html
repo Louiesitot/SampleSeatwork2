@@ -34,31 +34,37 @@
             max-width: 800px;
             margin: 20px auto;
             padding: 0 20px;
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
         }
         .category {
             display: flex;
-            align-items: center;
-            margin-bottom: 30px;
-            border-bottom: 1px solid #ccc;
-            padding-bottom: 20px;
+            flex-direction: column;
+            border: 1px solid #ccc;
             transition: background-color 0.3s;
         }
         .category:hover {
             background-color: #fdfdf2;
         }
         .category img {
-            width: 200px;
-            height: 200px;
+            width: 100%;
+            height: 200px; 
             object-fit: cover;
-            margin-right: 20px;
+            cursor: pointer;
         }
         .category-info {
-            flex: 1;
+            padding: 20px;
         }
         .category h3 {
             margin-top: 0;
             margin-bottom: 10px;
             color: gold;
+        }
+        .intro-text {
+            text-align: center;
+            margin-right: 60px;
+            margin-left: 60px;
         }
         nav {
             background-color: #333;
@@ -77,12 +83,56 @@
             margin-right: 40px;
         }
         nav ul li a {
-            color: gold;
+            color: #ffd966;
             text-decoration: none;
             font-size: 25px;
         }
         nav ul li a:hover {
             color: white;
+        }
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgb(0,0,0);
+            background-color: rgba(0,0,0,0.9);
+        }
+        .modal-content {
+
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            max-width: 90%;
+            max-height: 90%;
+            width: 800px;
+            height: 500px;
+            box-shadow: 2px 4px 8px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+            animation-name: modalopen;
+            animation-duration: 0.5s;
+        }
+        @keyframes modalopen {
+            from {opacity: 0}
+            to {opacity: 1}
+        }
+        .close {
+            color: #aaa;
+            float: right;
+            padding-top: 10px;
+            margin-right: 50px;
+            font-size: 50px;
+            font-weight: bold;
+        }
+        .close:hover,
+        .close:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
         }
     </style>
 </head>
@@ -99,45 +149,77 @@
         </ul>
     </nav>
 
+    
+        <div class="intro-text">
+            <h1>Buzzing Blossoms: Explore Our Hive of Honey Delights!</h1>
+            <p>Welcome to Emerald & Ruby Bee Farm, your source for premium honey and bee-related products! Established with a passion for sustainable beekeeping, Emerald & Ruby has been proudly providing the finest honey straight from our hives since 2005.
+
+            Our bee colonies are lovingly cared for by experienced beekeepers, ensuring that our bees forage on the finest nectar sources, including wildflowers, clover, and lavender, resulting in honey that is not only delicious but also reflects the unique flavors of our region.
+
+            In addition to our exquisite honey varieties, we offer a range of bee-related products, including beeswax candles, honeycomb, and bee pollen. Whether you're looking for a sweet treat or a natural wellness product, Emerald & Ruby has something for everyone.
+
+            As advocates for the environment, we are committed to sustainable practices that support bee health and biodiversity. By choosing Emerald & Ruby, you are not only enjoying the finest honey but also supporting the preservation of bee populations worldwide.
+
+            Explore our online store and experience the sweetness of Emerald & Ruby honey today!</p>
+        </div> <br></br>
+
     <div class="container">
         <div class="category">
-            <img src="ourbee.jpg" alt="Bees">
+            <img src="ourbee.jpg" alt="Bees" onclick="openModal('ourbee.jpg', 'Our Bees')">
             <div class="category-info">
                 <h3>Our Bees</h3>
-                <p>Learn about our beekeeping practices and how we care for our bees to produce high-quality honey.</p>
+                <p>At Emerald & Ruby Bee Farm, our bees are the heart of our operation. We take pride in our bees, which are a mix of Italian, Carniolan, and Russian honey bees known for their gentle nature and high productivity. Our beekeepers are passionate about maintaining healthy colonies, ensuring our bees have access to diverse forage, and providing a safe environment for them to thrive.</p>
             </div>
         </div>
         <div class="category">
-            <img src="ourhive.jpg" alt="Hive">
+            <img src="ourhive.jpg" alt="Hive" onclick="openModal('ourhive.jpg', 'Our Hives')">
             <div class="category-info">
                 <h3>Our Hives</h3>
-                <p>Discover the types of hives we use and how they help us maintain healthy bee colonies.</p>
+                <p>Our hives are designed with the comfort and health of our bees in mind. We use Langstroth hives, which are renowned for their efficiency and ease of management. Each hive is meticulously maintained, regularly inspected, and equipped with modern beekeeping technology to monitor hive conditions and ensure optimal production.</p>
             </div>
         </div>
         <div class="category">
-            <img src="ourflower.jpg" alt="Flowers">
+            <img src="ourflower.jpg" alt="Flowers" onclick="openModal('ourflower.jpg', 'Our Flowers')">
             <div class="category-info">
                 <h3>Our Flowers</h3>
-                <p>Explore the variety of flowers our bees pollinate, influencing the flavors of our honey.</p>
+                <p>At Emerald & Ruby Bee Farm, we are committed to sustainable beekeeping practices, which includes providing our bees with access to a variety of flowers for nectar and pollen. Our farm is situated in a floral-rich environment, allowing our bees to forage on a diverse range of plants, including clover, lavender, and wildflowers. This results in honey that is not only delicious but also reflects the unique floral characteristics of our region.</p>
             </div>
         </div>
         <div class="category">
-            <img src="ourhoney.jpg" alt="Honey">
+            <img src="ourhoney.jpg" alt="Honey" onclick="openModal('ourhoney.jpg', 'Our Honey')">
             <div class="category-info">
                 <h3>Our Honey</h3>
-                <p>Learn about the different types of honey we produce and their unique flavors and benefits.</p>
+                <p>The honey produced at Emerald & Ruby Bee Farm is a true labor of love. Our bees work tirelessly to collect nectar from flowers, which is then carefully harvested and processed by our beekeepers. The result is a pure, raw honey that is bursting with flavor and goodness. Our honey is available in a range of varieties, each with its own distinct taste and aroma, reflecting the seasonality and diversity of the flora in our area. Whether you enjoy it drizzled over yogurt, spread on toast, or used in cooking and baking, our honey is sure to delight your taste buds.</p>
             </div>
         </div>
     </div>
 
+    <div id="myModal" class="modal">
+        <span class="close" onclick="closeModal()">&times;</span>
+        <img class="modal-content" id="modalImg" src="">
+    </div>
+
     <script>
-        function showPopup() {
-            alert("Welcome to Emerald & Ruby Bee Farm Store!");
+        function openModal(imageSrc, caption) {
+            var modal = document.getElementById("myModal");
+            var modalImg = document.getElementById("modalImg");
+
+            modal.style.display = "block";
+            modalImg.src = imageSrc;
+            modalImg.alt = caption;
         }
 
-        window.onload = function() {
-            showPopup();
-        };
+        function closeModal() {
+            var modal = document.getElementById("myModal");
+            modal.style.display = "none";
+        }
+
+        window.onclick = function(event) {
+            var modal = document.getElementById("myModal");
+            if (event.target == modal) {
+                modal.style.display = "none";
+            }
+        }
     </script>
 </body>
 </html>
